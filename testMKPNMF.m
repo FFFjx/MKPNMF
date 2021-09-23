@@ -1,0 +1,27 @@
+clear;clc;
+load('PaviaU.mat')
+D=paviaU;
+D=reshape(D,size(D,1)*size(D,2),1,size(D,3));
+D=reshape(D,size(D,1),size(D,3));
+D=mat2gray(D);
+rank=6;
+gamma=[1/32 1/16 1/8 1/4 1/2 1 2 4 8 16 32];
+t0=cputime;
+[ W_phi,beta,err,K] = MKPNMF( D,rank,gamma );
+t_MKPNMF=cputime-t0;
+%A=W_phi'*K*W_phi;
+%[V,~] = eig(A);
+% W=W_phi*100;
+% W=abs(imresize(W,[207400,6]));
+% W1=reshape(W(:,1),610,340);
+% W2=reshape(W(:,2),610,340);
+% W3=reshape(W(:,3),610,340);
+% W4=reshape(W(:,4),610,340);
+% W5=reshape(W(:,5),610,340);
+% W6=reshape(W(:,6),610,340);
+% subplot(1,6,1);imshow(W1,[]);
+% subplot(1,6,2);imshow(W2,[]);
+% subplot(1,6,3);imshow(W3,[]);
+% subplot(1,6,4);imshow(W4,[]);
+% subplot(1,6,5);imshow(W5,[]);
+% subplot(1,6,6);imshow(W6,[]);
